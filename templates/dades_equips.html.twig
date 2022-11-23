@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+     <link href="{{ asset('assets/css/estilsEquip.css') }}" rel="stylesheet">
+ {% endblock %}
+
+
+{% block body %}
+
+    <body>
+
+    {% if equip %}
+
+    {% else %}
+
+    {% endif %}
+
+
+
+
+
+
+
+
+    {% if equip %}
+        <h1 id="titolEquip">Dades Equip {{ equip.codi }}</h1>
+
+        <p class="paragrafEquip">Proyecte 2n DAW.<br>
+            <img src="{{ asset('assets/img/catIronMan.jpg') }}" class="imatgeEquip" />
+        </p>
+        <div class="paragrafEquip">
+
+
+
+                <p class="tablaEquip"><strong>Codi:</strong>{{ equip.codi }}</p>
+                <p class="tablaEquip"><strong>Nom:</strong>{{ equip.nom }}</p>
+                <p class="tablaEquip"><strong>Cicle:</strong>{{ equip.cicle }}</p>
+                <p class="tablaEquip"><strong>Curs:</strong>{{ equip.curs }}</p>
+
+                <div class="tablaEquip"><strong>Membres:</strong>
+
+                {% for membre in equip.membres %}
+                    <p class="paragrafEquip">{{ membre }}</p>
+                {% endfor %}
+                </div>
+        </div>
+
+    {% else %}
+        <h1 id="titolEquip">Dades Equip BOBO</h1>
+        <p class="paragrafEquip">Proyecte 2n DAW.<br>
+            <img src="{{ asset('assets/img/catWonderWoman.jpg') }}" class="imatgeEquip" />
+        </p>
+        <div class="paragrafEquip">
+            <h1 id="titolEquip">Equip no trobat</h1>
+        </div>
+
+    {% endif %}
+    <div class="paragrafEquip">
+        <a href="{{ path('inici') }}">
+            <img src="{{ asset('assets/img/catWonderWoman.jpg') }}" class="imatgeEquip2" />
+            Tornar a l'inici
+        </a>
+    </div>
+
+
+
+    </body>
+
+
+
+{% endblock %}

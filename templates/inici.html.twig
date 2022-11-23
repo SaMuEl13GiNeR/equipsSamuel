@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+     <link href="{{ asset('assets/css/estilsInici.css') }}" rel="stylesheet">
+ {% endblock %}
+
+
+{% block body %}
+
+    <body>
+    <h1 id="titolInici">Projecte Symfony Equips 2DAW</h1>
+    <p id="paragrafInici">Inici programa gestió d'equips i gats del projecte 2n DAW.<br>
+        IES Lluís Simarro<br>
+
+        Curs 22/23
+
+        <br>
+        <a href="{{ path('dades_equips') }}"><img src="{{ asset('assets/img/catBatMan.jpg') }}" class="imatgeInici" /></a></p>
+
+
+
+    </body>
+
+
+
+{% endblock %}
