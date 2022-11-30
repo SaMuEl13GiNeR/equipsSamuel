@@ -10,23 +10,10 @@
     <body>
 
     {% if equip %}
-
-    {% else %}
-
-    {% endif %}
-
-
-
-
-
-
-
-
-    {% if equip %}
         <h1 id="titolEquip">Dades Equip {{ equip.codi }}</h1>
 
         <p class="paragrafEquip">Proyecte 2n DAW.<br>
-            <img src="{{ asset('assets/img/catIronMan.jpg') }}" class="imatgeEquip" />
+            <img src="{{  asset('assets/img/'~equip.img) }}" class="imatgeEquip" />
         </p>
         <div class="paragrafEquip">
 

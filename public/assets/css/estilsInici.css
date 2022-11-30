@@ -22,3 +22,12 @@ p#paragrafInici{
 body{
     background-color:#DDD;
 }
+h2#titolDos{
+    width: 50%;
+    color: blue;
+    border: solid blue 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f2e7c3;
+}
