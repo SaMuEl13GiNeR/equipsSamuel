@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+     <link href="{{ asset('assets/css/estilsEquip.css') }}" rel="stylesheet">
+ {% endblock %}
+
+
+{% block body %}
+
+    <body>
+
+    {% if error %}
+
+    <h1 id="titolEquip">Error en la inserció dels equips:<br>
+        {% for equip in equips %}
+            Equip {{ equip.nom }}<br>
+        {% endfor %}
+    </h1>
+        <p class="paragrafEquip">
+            <img src="{{ asset('assets/img/catWonderWoman.jpg') }}" class="imatgeEquip" />
+        <p class="paragrafEquip">
+            {{ error }}
+        </p>
+
+        </p>
+        <div class="paragrafEquip">
+            <h1 id="titolEquip">Equip no trobat</h1>
+        </div>
+    {% else %}
+
+        <h1 id="titolEquip">Equips:<br>
+        {% for equip in equips %}
+            Equip {{ equip.nom }} amb id: {{ equip.id }}<br>
+        {% endfor %}
+
+        </h1>
+
+        <p class="paragrafEquip">
+            <img src="{{  asset('assets/img/catIronMan.jpg') }}" class="imatgeEquip" />
+        </p>
+
+    {% endif %}
+    <div class="paragrafEquip">
+        <a href="{{ path('inici') }}">
+            <img src="{{ asset('assets/img/catWonderWoman.jpg') }}" class="imatgeEquip2" />
+            Tornar a l'inici
+        </a>
+    </div>
+
+
+
+    </body>
+
+
+
+{% endblock %}
