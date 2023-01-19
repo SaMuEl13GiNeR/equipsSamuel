@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}EDITAR EQUIP{% endblock %}
+{% block body %}
+    <h1>Editar Equip</h1>
+    {{ form(formulari) }}
+
+    <p>Imatge Actual</p>
+    <img style="width: 400px;margin: 10px;"src="{{ asset('img/equips/'~equip.imatge) }}"/>
+{% endblock %}

@@ -33,7 +33,9 @@
     padding:10px;
     background-color:#f2e7c3;">
             {% for equip in equips %}
-        <p id="paragrafInici" > <a  id="paragrafInici" style="color:#0a53be" href="equip/{{ equip.id }}">{{ equip.nom }}</a></p>
+        <p id="paragrafInici" > <a  id="paragrafInici" style="color:#0a53be" href="equip/{{ equip.id }}">{{ equip.nom }}</a>
+            <a href="{{  path('editarEquip', {'codi': equip.id}) }}"><img style="width: 30px; heigth: 30px;" src="{{ asset('assets/img/catWonderWoman.jpg') }}" /></a></p>
+
             {% endfor %}
         </div>
 

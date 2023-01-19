@@ -21,6 +21,50 @@ class EquipsController extends AbstractController
 //        $this->equips = $dades->get();
 //    }
 
+    #[Route('/equip/editar/{codi}' ,name:'editarEquip', requirements: ['codi' => '\d+'])]
+    public function editar(Request $request, $codi, ManagerRegistry $doctrine)
+    {
+        $equip = new Equip();
+        $repositori = $doctrine->getRepository(Equip::class);
+        $equip = $repositori->find($codi);
+        $formulari = $this->createFormBuilder($equip)
+            ->add('nom', TextType::class)
+            ->add('cicle', TextType::class)
+            ->add('curs', TextType::class)
+            ->add('imatge', FileType::class,array('required' => false, 'mapped' => false))
+            ->add('nota', NumberType::class)
+            ->add('save', SubmitType::class, array('label' => 'Enviar'))
+            ->getForm();
+        $formulari->handleRequest($request);
+        if ($formulari->isSubmitted() && $formulari->isValid())
+        {
+            $equip = $formulari->getData();
+
+            $imatge = $formulari->get('imatge')->getData();
+            
+
+            //$imatge = $equip->getImatge();
+            if ($imatge) {
+                $nomFitxer = $imatge->getClientOriginalName();
+                $directori = $this->getParameter('kernel.project_dir') . "/public/img/equips/";
+                try {
+                    $imatge->move($directori,$nomFitxer);
+                } catch (FileException $e) {
+                    return $this->render('editar_equip.html.twig', array('equip' => $equip, 'error' => $e));
+                }
+                $equip->setImatge($nomFitxer);
+            } else {
+                $equip->setImatge('catIronMan.jpg');
+            }
+
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($equip);
+            $entityManager->flush();
+            return $this->redirectToRoute('inici');
+        }
+        return $this->render('editar_equip.html.twig', array('formulari' => $formulari->createView(), 'equip' => $equip));
+    }
 
     #[Route('/equip/nou' ,name:'nouEquip')]
     public function nou(Request $request, ManagerRegistry $doctrine)
