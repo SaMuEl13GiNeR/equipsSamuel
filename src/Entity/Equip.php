@@ -31,6 +31,13 @@ class Equip
     #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 0)]
     private ?string $nota = null;
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

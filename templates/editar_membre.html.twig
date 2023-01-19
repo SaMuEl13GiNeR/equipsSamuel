@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}EDITAR MEMBRE{% endblock %}
+{% block body %}
+    <h1>Editar Membre</h1>
+    {{ form(formulari) }}
+
+    <p>Imatge Actual</p>
+    <img style="width: 400px;margin: 10px;"src="{{ asset('img/membres/'~membre.imatgeperfil) }}"/>
+{% endblock %}

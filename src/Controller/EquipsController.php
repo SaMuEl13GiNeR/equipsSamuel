@@ -27,6 +27,7 @@ class EquipsController extends AbstractController
         $equip = new Equip();
         $repositori = $doctrine->getRepository(Equip::class);
         $equip = $repositori->find($codi);
+        $imatgeOld = $equip->getImatge();
         $formulari = $this->createFormBuilder($equip)
             ->add('nom', TextType::class)
             ->add('cicle', TextType::class)
@@ -47,6 +48,7 @@ class EquipsController extends AbstractController
             if ($imatge) {
                 $nomFitxer = $imatge->getClientOriginalName();
                 $directori = $this->getParameter('kernel.project_dir') . "/public/img/equips/";
+                unlink("img/equips/".$imatgeOld);
                 try {
                     $imatge->move($directori,$nomFitxer);
                 } catch (FileException $e) {

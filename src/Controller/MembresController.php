@@ -18,6 +18,54 @@ class MembresController extends AbstractController
 {
 
 
+    #[Route('/membre/editar/{codi}' ,name:'editarMembre', requirements: ['codi' => '\d+'])]
+    public function editar(Request $request, $codi, ManagerRegistry $doctrine)
+    {
+        $membre = new Membre();
+        $repositori = $doctrine->getRepository(Membre::class);
+        $membre = $repositori->find($codi);
+        $imatgeOld = $membre->getImatgePerfil();
+        $formulari = $this->createFormBuilder($membre)
+            ->add('nom', TextType::class)
+            ->add('cognoms', TextType::class)
+            ->add('email', TextType::class, array('label' => 'Correu Electrònic'))
+            ->add('dataNaixement', DateType::class, array('label' => 'Data de Naixement', 'years' => range(1920,2022)))
+            ->add('imatgePerfil', FileType::class,array('required' => false, 'mapped' => false))
+            ->add('equip', EntityType::class, array('class' => Equip::class, 'choice_label' => 'nom'))
+            ->add('nota', NumberType::class)
+            ->add('save', SubmitType::class, array('label' => 'Enviar'))
+            ->getForm();
+        $formulari->handleRequest($request);
+
+        if ($formulari->isSubmitted() && $formulari->isValid())
+        {
+            $membre = $formulari->getData();
+
+            $imatge = $formulari->get('imatgePerfil')->getData();
+
+            if ($imatge) {
+                $nomFitxer = $imatge->getClientOriginalName();
+                $directori = $this->getParameter('kernel.project_dir') . "/public/img/membres/";
+                unlink("img/membres/".$imatgeOld);
+                try {
+                    $imatge->move($directori,$nomFitxer);
+                } catch (FileException $e) {
+                    return $this->render('editar_membre.html.twig', array('membre' => $membre, 'error' => $e));
+                }
+                $membre->setImatgePerfil($nomFitxer);
+            }
+
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($membre);
+            $entityManager->flush();
+            return $this->redirectToRoute('inici');
+        }
+        return $this->render('editar_membre.html.twig', array('formulari' => $formulari->createView(), 'membre' => $membre));
+    }
+
+
+
     #[Route('/membre/nou' ,name:'nouMembre')]
     public function nou(Request $request, ManagerRegistry $doctrine)
     {
