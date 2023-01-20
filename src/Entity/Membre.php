@@ -6,6 +6,7 @@ use App\Repository\MembreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
 #[UniqueEntity('email')]
@@ -17,25 +18,45 @@ class Membre
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
     private ?string $cognoms = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank]
+    #[Assert\Email(message: "L'email {{ value }} no és vàlid")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $imatge_perfil = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
+    #[Assert\Range(
+        min: '1950-1-1',
+        minMessage: '"La data de naixement {{ value }} ha de ser major que 1950-1-1',
+    )]
     private ?\DateTimeInterface $data_naixement = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 2, nullable: true)]
+    #[Assert\NotBlank]
+    //#[Assert\Type('integer')]
+    #[Assert\Range(
+        min: 0,
+        minMessage: '"La nota ha de ser major que {{ value }}',
+    )]
+    #[Assert\Range(
+        max: 10,
+        maxMessage: 'La nota ha de ser menor que {{ value }}',
+    )]
     private ?string $nota = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Equip $equip = null;
 
     public function getId(): ?int

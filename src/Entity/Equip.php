@@ -6,6 +6,8 @@ use App\Repository\EquipRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: EquipRepository::class)]
 #[UniqueEntity('nom')]
@@ -17,18 +19,31 @@ class Equip
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank]
     private ?string $cicle = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank]
     private ?string $curs = null;
 
     #[ORM\Column(length: 255)]
     private ?string $imatge = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 0)]
+    #[Assert\NotBlank]
+    //#[Assert\Type('integer')]
+    #[Assert\Range(
+        min: 0,
+        minMessage: '"La nota ha de ser major que {{ value }}',
+    )]
+    #[Assert\Range(
+        max: 10,
+        maxMessage: 'La nota ha de ser menor que {{ value }}',
+    )]
     private ?string $nota = null;
 
     public function setId(int $id): self
