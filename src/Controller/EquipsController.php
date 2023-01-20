@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 //use App\Service\ServeiDadesEquips;
+use App\Entity\Membre;
 use App\Form\EquipEditarType;
 use App\Form\EquipNouType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -162,12 +163,14 @@ class EquipsController extends AbstractController
     #[Route('/equip/{id}', name:'dades_equips')]
     public function equip($id, ManagerRegistry $doctrine)
     {
-        $repositori = $doctrine->getRepository(Equip::class);
-        $equip = $repositori->find($id);
+        $repositoriEquip = $doctrine->getRepository(Equip::class);
+        $repositoriMembre = $doctrine->getRepository(Membre::class);
+        $membres = $repositoriMembre->findAll();
+        $equip = $repositoriEquip->find($id);
         if($equip){
-            return $this->render('dades_equips.html.twig', array('equip' =>$equip));
+            return $this->render('dades_equips.html.twig', array('equip' =>$equip, 'membres' => $membres));
         } else {
-            return $this->render('dades_equips.html.twig', array('equip' =>NULL));
+            return $this->render('dades_equips.html.twig', array('equip' =>NULL, 'membres' => NULL));
         }
     }
 

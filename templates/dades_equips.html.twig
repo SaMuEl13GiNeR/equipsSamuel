@@ -25,12 +25,24 @@
                 <p class="tablaEquip"><strong>Curs:</strong>{{ equip.curs }}</p>
                 <p class="tablaEquip"><strong>Nota:</strong>{{ equip.nota }}</p>
 
-{#                <div class="tablaEquip"><strong>Membres:</strong>#}
+                <div class="tablaEquip"><strong>Membres:</strong><br>
+                    {% set comptador = 0 %}
+                        {% for membre in membres %}
+                            {% if membre.equip.id == equip.id %}
+                                {% set comptador = comptador + 1 %}
+                                    {{ membre.nom }}
+                                <a href="{{ path('editarMembre', {'codi': membre.id}) }}"><img style="width: 30px; heigth: 30px;" src="{{ asset('assets/img/catWonderWoman.jpg') }}" /></a><br>
+                            {% endif %}
+                        {% endfor %}
+                    {% if comptador == 0 %}
+                        <p>Encara no hi ha membres</p>
+                    {% endif %}
+
 
 {#                {% for membre in equip.membres %}#}
 {#                    <p class="paragrafEquip">{{ membre }}</p>#}
 {#                {% endfor %}#}
-{#                </div>#}
+                </div>
 
         </div>
 
