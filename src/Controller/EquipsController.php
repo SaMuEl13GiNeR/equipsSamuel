@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 //use App\Service\ServeiDadesEquips;
+use App\Form\EquipEditarType;
+use App\Form\EquipNouType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -28,14 +30,8 @@ class EquipsController extends AbstractController
         $repositori = $doctrine->getRepository(Equip::class);
         $equip = $repositori->find($codi);
         $imatgeOld = $equip->getImatge();
-        $formulari = $this->createFormBuilder($equip)
-            ->add('nom', TextType::class)
-            ->add('cicle', TextType::class)
-            ->add('curs', TextType::class)
-            ->add('imatge', FileType::class,array('required' => false, 'mapped' => false))
-            ->add('nota', NumberType::class)
-            ->add('save', SubmitType::class, array('label' => 'Enviar'))
-            ->getForm();
+        $formulari = $this->createForm(EquipEditarType::class, $equip);
+
         $formulari->handleRequest($request);
         if ($formulari->isSubmitted() && $formulari->isValid())
         {
@@ -72,14 +68,7 @@ class EquipsController extends AbstractController
     public function nou(Request $request, ManagerRegistry $doctrine)
     {
         $equip = new Equip();
-        $formulari = $this->createFormBuilder($equip)
-            ->add('nom', TextType::class)
-            ->add('cicle', TextType::class)
-            ->add('curs', TextType::class)
-            ->add('imatge', FileType::class,array('required' => false))
-            ->add('nota', NumberType::class)
-            ->add('save', SubmitType::class, array('label' => 'Enviar'))
-            ->getForm();
+        $formulari = $this->createForm(EquipNouType::class, $equip);
         $formulari->handleRequest($request);
         if ($formulari->isSubmitted() && $formulari->isValid())
         {
