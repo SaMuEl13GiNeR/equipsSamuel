@@ -45,6 +45,7 @@ security:
         - { path: ^/equip/editar, roles: ROLE_ADMIN }
         - { path: ^/membre/nou, roles: ROLE_ADMIN }
         - { path: ^/membre/editar, roles: ROLE_ADMIN }
+        - { path: ^/usuari, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

@@ -1,0 +1,39 @@
+body {
+    background-color: rgba(228, 228, 228, 0.336);
+}
+
+
+.h1 {
+    border: 1px solid black;
+    /*background-color: white;*/
+    color: red;
+    margin: 10px auto;
+
+    width: 50%;
+    padding: 10px 0;
+}
+
+h2{
+    border: 1px solid black;
+    background-color: white;
+    color: blue;
+}
+
+.contenidor{
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 2%;
+    gap: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+img{
+    display: flex;
+    transform: scale(.7);
+    margin: auto 35%;
+}
+
+
+

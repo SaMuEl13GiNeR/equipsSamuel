@@ -24,6 +24,8 @@ class EquipsController extends AbstractController
 //        $this->equips = $dades->get();
 //    }
 
+
+
     #[Route('/equip/editar/{codi}' ,name:'editarEquip', requirements: ['codi' => '\d+'])]
     public function editar(Request $request, $codi, ManagerRegistry $doctrine)
     {

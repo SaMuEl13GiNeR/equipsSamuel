@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <link href="{{ asset('css/user.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block title %}Usuaris David es marica{% endblock %}
+{% block body %}
+    <div class="contenidor">
+
+        <h1 class="h1">Usuaris Projecte Equips 2n DAW</h1>
+        <br>
+        <h2>Llista d'usuaris</h2>
+        <table>
+            <th>id</th>
+            <th>username</th>
+            <th>password</th>
+            <th>roles</th>
+            <th>editar</th>
+            <th>eliminar</th>
+            {% for usuari in usuaris %}
+                <tr>
+                    <td>{{usuari.id}}</td>
+                    <td>{{usuari.username}}</td>
+                    <td>{{usuari.password}}</td>
+                    <td>{{usuari.roles[0]}}</td>
+                    <td><a href="{{  path('editarUsuari', {'codi': usuari.id}) }}"><img style="width: 30px; heigth: 30px;" src="{{ asset('img/catIronMan.jpg') }}" /></a></td>
+                    <td><a href="{{  path('eliminarUsuari', {'codi': usuari.id}) }}"><img style="width: 30px; heigth: 30px;" src="{{ asset('img/catWonderWoman.jpg') }}" /></a></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock %}
