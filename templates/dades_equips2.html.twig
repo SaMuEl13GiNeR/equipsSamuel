@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+     <link href="{{ asset('assets/css/estilsInici.css') }}" rel="stylesheet">
+ {% endblock %}
+
+
+{% block body %}
+
+    <body>
+    <h1 id="titolInici">Projecte Symfony Equips 2DAW</h1>
+    </p><h2 style=" width: 50%;
+    color: blue;
+    border: solid blue 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f2e7c3;">Llistat d'equips</h2>
+
+        <div style="width: 80%;
+    border: solid black 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f2e7c3;">        <div class="card-group">
+            {% for equip in equips %}
+
+                <a href="{{  path('dades_equips', {'id': equip.id}) }}">
+
+                <div class="card" style="width: 18rem;">
+                    <img style="width: 200px; height: 150px;"src="/img/equips/{{ equip.imatge }}" class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ equip.id }}.{{ equip.nom }}</h5>
+                        <a href="{{  path('editarEquip', {'codi': equip.id}) }}">Editar <img style="width: 30px; heigth: 30px;" src="{{ asset('assets/img/catWonderWoman.jpg') }}" /></a>
+                    </div>
+                </div>
+
+                </a>
+
+            {% endfor %}
+            </div>
+        </div>
+
+
+    </body>
+
+
+
+{% endblock %}

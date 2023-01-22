@@ -51,7 +51,7 @@
             <ul>
                 <li><a class="nav-link scrollto active" href="{{ path('inici') }}">Inici</a></li>
                 <li><a class="nav-link scrollto" href="
-{#                        {{ path('dades_equips') }}#}
+                        {{ path('equips') }}
                         ">Equips</a></li>
 
                 {% if is_granted('ROLE_ADMIN') %}
@@ -94,8 +94,68 @@
 
         {% block body %}{% endblock %}
     </div>
-
-
-
 </body>
+    {%  block footer %}
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-info">
+                                <h3>Projecte 2n DAW<span>.</span></h3>
+                                <p>
+                                    Projecte Symfony gestió d'equips i membres del projecte final de 2n de DAW.
+                                </p>
+                                <div class="social-links mt-3">
+                                    <a href="https://twitter.com/SaMuEl13GiNeR" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100009934752857" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                    <a href="https://www.instagram.com/samuel13giner/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                    <a href="https://www.reddit.com/user/SaMuEl13GiNeR" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                    <a href="https://github.com/SaMuEl13GiNeR" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-6 footer-links">
+                            <h4>Enllaços</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{{ path('inici') }}">Inici</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href=" {{ path('equips') }}">Equips</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Contacte</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><i class="bx bx-chevron-right"></i> <a href="{{ path('admin') }}">Administració</a></li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Serveis</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Disseny Web</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Desenvolupament web</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Gestió d'equips</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Gestió de Membres</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Disseny Gràfic</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 footer-newsletter">
+                            <h4>Contacta'ns</h4>
+                            <p>Avinguda Corts Valencianes
+                            Xàtiva, Valencia, 46800</p>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    {% endblock %}
+
+
+
 </html>
