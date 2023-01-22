@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+
+    <h1>Error 404</h1>
+
+    <img src="{{ asset('assets/img/catBatMan.jpg') }}" style="width: 400px; margin: 10px;" />
+    <p>
+        No se ha podido localizar la página solicitada. Comprueba cualquier error
+        escrito en la URL o <a href="{{ path('inici') }}">vuelve al inicio</a>.
+    </p>
+{% endblock %}
