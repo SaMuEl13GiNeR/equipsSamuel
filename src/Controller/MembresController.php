@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Equip;
 use App\Entity\Membre;
 
+
 use Doctrine\Persistence\ManagerRegistry;
 class MembresController extends AbstractController
 {
