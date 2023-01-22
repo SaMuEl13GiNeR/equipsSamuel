@@ -5,7 +5,7 @@
     <h1>Login</h1>
     {% if error %}
         <div>{{ error.messageKey }}</div>
-    {% endif %}
+    {% endif %}  
     <form action="{{ path('login') }}" method="post">
         <label for="username">Login:</label>
         <input type="text" id="username" name="_username" value="{{ lastUsername }}" />
